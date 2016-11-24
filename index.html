@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Apk_Drag</title>
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/jquery-ui.css">
+    <link rel="stylesheet" href="dist/css/layout.css">
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="dist/js/jquery-ui.js"></script>
+</head>
+<body>
+<div class="header">
+    <h1 class="text-center">Apk_Drag</h1>
+</div>
+<div class="row">
+    <div class="col-lg-1 col-lg-offset-2 leftModal">
+        <div class="modal-header">
+            <h4 class="text-center">拖拽控件</h4>
+        </div>
+        <div id="imageDrag" class="leftDrag"
+             style="width: 100px;height: 100px; background-color:#5cb85c;border: 1px #000000 solid;">
+            <p>图片</p>
+        </div>
+        <div id="videoDrag" class="leftDrag"
+             style="width: 100px;height: 100px; background-color:#5bc0de;border: 1px #000000 solid;">
+            <p>视频</p>
+        </div>
+        <div id="textDrag" class="leftDrag"
+             style="width: 100px;height: 100px; background-color:#5cb85c;border: 1px #000000 solid;">
+            <p>文本</p>
+        </div>
+        <div id="HDMIDrag" class="leftDrag"
+             style="width: 100px;height: 100px; background-color:#5bc0de;border: 1px #000000 solid;">
+            <p>HDMI</p>
+        </div>
+        <div id="webDrag" class="leftDrag"
+             style="width: 100px;height: 100px; background-color:#5cb85c;border: 1px #000000 solid;">
+            <p>web</p>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div id="containment-wrapper" class="" style="width: 964px;height: 544px;border: 2px solid gray">
+        </div>
+    </div>
+    <div class="col-lg-2 rightModal">
+        <div class="rightBox">
+            <div class="modal-header">
+                <h4 class="text-center">座标信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p id="left">横坐标：</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p id="top">纵坐标：</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p id="width">宽&nbsp;&nbsp;&nbsp;&nbsp;度：</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p id="height">高&nbsp;&nbsp;&nbsp;&nbsp;度：</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="rightBox hide" id="imageInfo">
+            <div class="modal-header">
+                <h4 class="text-center">控件信息</h4>
+            </div>
+            <div class="modal-body">
+                <label class="radio-inline">
+                    <input type="radio" name="imageInfoVal" id="image1" value="image1"> 图片一
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="imageInfoVal" id="image2" value="image2"> 图片二
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="imageInfoVal" id="image3" value="image3"> 图片三
+                </label>
+            </div>
+        </div>
+        <div class="rightBox hide" id="videoInfo">
+            <div class="modal-header">
+                <h4 class="text-center">控件信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="videoVoice">
+                    <label>声音：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="videoVoiceVal" value="1"> 打开
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="videoVoiceVal" value="0"> 关闭
+                    </label>
+                </div>
+                <div class="form-group" id="videoPlay">
+                    <label>重复播放：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="videoPlayVal" value="1"> 打开
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="videoPlayVal" value="0"> 关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="rightBox hide" id="textInfo">
+            <div class="modal-header">
+                <h4 class="text-center">控件信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="textVal">内容：</label>
+                    <textarea class="form-control" rows="3" id="textVal"></textarea>
+                </div>
+                <div class="form-group" id="textColorRadio">
+                    <label>颜色：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textColorVal" id="textColorRed" value="red"> 红
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textColorVal" id="textColorYellow" value="yellow"> 黄
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textColorVal" id="textColorBlue" value="blue"> 蓝
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textColorVal" id="textColorBlack" value="black"> 黑
+                    </label>
+                </div>
+                <div class="form-group" id="textFontRadio">
+                    <label>大小：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textFontVal" id="textFontS" value="s"> 小
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textFontVal" id="textFontM" value="m"> 中
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="textFontVal" id="textFontB" value="l"> 大
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="rightBox hide" id="HDNIInfo">
+            <div class="modal-header">
+                <h4 class="text-center">控件信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="hdmiVoice">
+                    <label>声音：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="hdmiVoiceVal" value="1"> 打开
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="hdmiVoiceVal" value="0"> 关闭
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="rightBox hide" id="webInfo">
+            <div class="modal-header">
+                <h4 class="text-center">控件信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Web Address</label>
+                    <input type="text" class="form-control" id="webVal" name="webVal" placeholder="Web Address">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <botton class="col-lg-offset-4 col-lg-4 btn btn-success" style="margin-top: 30px;" id="push" onclick="push()">
+            推送
+        </botton>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        var imageDrag = $("#imageDrag");
+        var videoDrag = $("#videoDrag");
+        var textDrag = $("#textDrag");
+        var HDMIDrag = $("#HDMIDrag");
+        var webDrag = $("#webDrag");
+        var wrapper = $("#containment-wrapper");
+        imageDrag.draggable({
+            revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+            helper: "clone"
+        });
+        videoDrag.draggable({
+            revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+            helper: "clone"
+        });
+        textDrag.draggable({
+            revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+            helper: "clone"
+        });
+        HDMIDrag.draggable({
+            revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+            helper: "clone"
+        });
+        webDrag.draggable({
+            revert: "invalid", // 当未被放置时，条目会还原回它的初始位置
+            helper: "clone"
+        });
+        wrapper.droppable({
+            accept: "#imageDrag,#videoDrag,#textDrag,#HDMIDrag,#webDrag",//被接受的div
+            activeClass: "containment-wrapper",
+            drop: function (event, ui) {
+                var dragId = ui.draggable.context.id;
+                var div_x = ui.offset.top - wrapper.offset().top;
+                var div_y = ui.offset.left - wrapper.offset().left;
+                //判断边界是否超出
+                var top = div_x;
+                var left = div_y;
+                if (div_x < 0) {
+                    top = 0;
+                }
+                if (div_x + 180 > 544) {
+                    top = 544 - 180;
+                }
+                if (div_y < 0) {
+                    left = 0;
+                }
+                if (div_y + 172 > 964) {
+                    left = 964 - 172;
+                }
+                //子节点追加
+                if (dragId == 'imageDrag') {
+                    var str = '<div class="Drag draggable" dragAttr="image" style="position: absolute;top:' + top + 'px;left: ' + left + 'px;" onclick="clickDrag(this)"><button type="button" class="delete close">&times;</button><p class="text-center">图片</p><input type="hidden" class="imageInput" name="image[]" value=""></div>';
+                } else if (dragId == 'videoDrag') {
+                    var str = '<div class="Drag draggable" dragAttr="video" style="position: absolute;top:' + top + 'px;left: ' + left + 'px;" onclick="clickDrag(this)"><button type="button" class="delete close">&times;</button><p class="text-center">视频</p><input type="hidden" class="videoInput" name="videoVoice[]" value=""><input type="hidden" class="videoInput" name="videoPlay[]" value=""><input type="hidden" class="videoInput" name="videoAdd[]" value=""></div>';
+                } else if (dragId == 'textDrag') {
+                    var str = '<div class="Drag draggable" dragAttr="text" style="position: absolute;top:' + top + 'px;left: ' + left + 'px;" onclick="clickDrag(this)"> <button type="button" class="delete close">&times;</button> <p class="text-center">文本</p> <input type="hidden" class="textInput" name="textvalue[]"><input type="hidden" class="textInput" name="textColor[]"><input type="hidden" class="textInput" name="textFont[]"> </div>';
+                } else if (dragId == 'HDMIDrag') {
+                    var str = '<div class="Drag draggable" id="HDMI" dragAttr="hdmi" style="position: absolute;top:' + top + 'px;left: ' + left + 'px;" onclick="clickDrag(this)"><button type="button" class="delete close">&times;</button><p class="text-center">HDMI</p><input type="hidden" class="hdmiInput" name="hdmi[]"></div>';
+                } else if (dragId == 'webDrag') {
+                    var str = '<div class="Drag draggable" dragAttr="web" style="position: absolute;top:' + top + 'px;left: ' + left + 'px;" onclick="clickDrag(this)"><button type="button" class="delete close">&times;</button><p class="text-center">web</p><input type="hidden" class="webInput" name="web[]"></div>';
+                }
+                wrapper.append(str);
+                drag();
+//                clickDrag();
+                deleteDragModal();
+                isHDMIDrop();
+            }
+        });
+        drag();
+//        clickDrag();
+        deleteDragModal();
+    });
+    //HDMI只允许添加一个
+    function isHDMIDrop() {
+        var hdmiLen = $("#HDMI").length;
+        if (hdmiLen == 1) {
+            $("#HDMIDrag").addClass("hide");
+        } else {
+            $("#HDMIDrag").removeClass("hide");
+        }
+    }
+    //点击拖拽控制出现信息的输入
+    function clickDrag(obj) {
+        $("#top").html("纵坐标：");
+        $("#left").html("横坐标：");
+        $("#width").html("宽&nbsp;&nbsp;&nbsp;&nbsp;度：");
+        $("#height").html("高&nbsp;&nbsp;&nbsp;&nbsp;度：");
+        var dragAttr = event.srcElement.getAttribute("dragAttr");
+        var x1 = 2 * (event.srcElement.offsetTop);
+        var x2 = 2 * (event.srcElement.offsetWidth);
+        var y1 = 2 * (event.srcElement.offsetLeft);
+        var y2 = 2 * (event.srcElement.offsetHeight);
+        $("#top").append("&nbsp;&nbsp;" + x1);
+        $("#left").append("&nbsp;&nbsp;" + y1);
+        $("#width").append("&nbsp;&nbsp;" + x2);
+        $("#height").append("&nbsp;&nbsp;" + y2);
+        if (dragAttr == "image") {
+            $("#imageInfo").removeClass("hide");
+            $("#videoInfo").addClass("hide");
+            $("#textInfo").addClass("hide");
+            $("#HDNIInfo").addClass("hide");
+            $("#webInfo").addClass("hide");
+            var imgInputVal = $(obj).find('input').val();
+            if (imgInputVal) {
+                $("#imageInfo input[type=radio][name='imageInfoVal'][value=" + imgInputVal + "]").prop("checked", 'checked');
+            } else {
+                $("#imageInfo input[type=radio][name='imageInfoVal']").removeAttr('checked');
+            }
+            $("#imageInfo").change(function () {
+                var imageInfoVal = $("input[name='imageInfoVal']:checked").val();
+                $(obj).find('input').val(imageInfoVal);
+                $("#imageInfo").unbind("change");
+            });
+        } else if (dragAttr == "video") {
+            $("#imageInfo").addClass("hide");
+            $("#videoInfo").removeClass("hide");
+            $("#textInfo").addClass("hide");
+            $("#HDNIInfo").addClass("hide");
+            $("#webInfo").addClass("hide");
+            var videoVoice = $(obj).find("input[name='videoVoice[]']").val();
+            var videoPlay = $(obj).find("input[name='videoPlay[]']").val();
+            if (videoVoice) {
+                $("#videoVoice input[type=radio][name='videoVoiceVal'][value=" + videoVoice + "]").prop("checked", 'checked');
+            } else {
+                $("#videoVoice input[type=radio][name='videoVoiceVal']").removeAttr('checked');
+            }
+            if (videoPlay) {
+                $("#videoPlay input[type=radio][name='videoPlayVal'][value=" + videoPlay + "]").prop("checked", 'checked');
+            } else {
+                $("#videoPlay input[type=radio][name='videoPlayVal']").removeAttr('checked');
+            }
+            $("#videoVoice").change(function () {
+                var videoVoiceVal = $("input[name='videoVoiceVal']:checked").val();
+                $(obj).find("input[name='videoVoice[]']").val(videoVoiceVal);
+                $("#videoVoice").unbind("change");
+            });
+            $("#videoPlay").change(function () {
+                var videoPlayVal = $("input[name='videoPlayVal']:checked").val();
+                $(obj).find("input[name='videoPlay[]']").val(videoPlayVal);
+                $("#videoPlay").unbind("change");
+            });
+        } else if (dragAttr == "text") {
+            $("#imageInfo").addClass("hide");
+            $("#videoInfo").addClass("hide");
+            $("#textInfo").removeClass("hide");
+            $("#HDNIInfo").addClass("hide");
+            $("#webInfo").addClass("hide");
+            var textColorVal = $(obj).find('input[name="textColor[]"]').val();
+            var textFontVal = $(obj).find('input[name="textFont[]"]').val();
+            var textvalueVal = $(obj).find('input[name="textvalue[]"]').val();
+            if (textColorVal) {
+                $("#textInfo input[type=radio][name='textColorVal'][value=" + textColorVal + "]").prop("checked", 'checked');
+            } else {
+                $("#textInfo input[type=radio][name='textColorVal']").removeAttr('checked');
+            }
+            if (textFontVal) {
+                $("#textInfo input[type=radio][name='textFontVal'][value=" + textFontVal + "]").prop("checked", 'checked');
+            } else {
+                $("#textInfo input[type=radio][name='textFontVal']").removeAttr('checked');
+            }
+            if (textvalueVal) {
+                $("#textVal").val(textvalueVal);
+            } else {
+                $("#textVal").val('');
+            }
+            $("#textColorRadio").change(function () {
+                var textColorVal = $("input[name='textColorVal']:checked").val();
+                $(obj).find("input[name='textColor[]']").val(textColorVal);
+                $("#textColorRadio").unbind("change");
+            });
+            $("#textFontRadio").change(function () {
+                var textFontVal = $("input[name='textFontVal']:checked").val();
+                $(obj).find('input[name="textFont[]"]').val(textFontVal);
+                $("#textFontRadio").unbind("change");
+            });
+            $("#textVal").blur(function () {
+                var textval = $("#textVal").val();
+                $(obj).find("input[name='textvalue[]']").val(textval);
+                $("#textVal").unbind("blur");
+            })
+        } else if (dragAttr == "hdmi") {
+            $("#imageInfo").addClass("hide");
+            $("#videoInfo").addClass("hide");
+            $("#textInfo").addClass("hide");
+            $("#HDNIInfo").removeClass("hide");
+            $("#webInfo").addClass("hide");
+            var hdmiInputVal = $(obj).find('input').val();
+            if (hdmiInputVal) {
+                $("#hdmiVoice input[type=radio][name='hdmiVoiceVal'][value=" + hdmiInputVal + "]").prop("checked", 'checked');
+            } else {
+                $("#hdmiVoice input[type=radio][name='hdmiVoiceVal']").removeAttr('checked');
+            }
+            $("#HDNIInfo").change(function () {
+                var HDNIInfoVal = $("input[name='hdmiVoiceVal']:checked").val();
+                $(obj).find('input').val(HDNIInfoVal);
+                $("#HDNIInfo").unbind("change");
+            });
+        } else if (dragAttr == "web") {
+            $("#imageInfo").addClass("hide");
+            $("#videoInfo").addClass("hide");
+            $("#textInfo").addClass("hide");
+            $("#HDNIInfo").addClass("hide");
+            $("#webInfo").removeClass("hide");
+            var webVal = $(obj).find('input[name="web[]"]').val();
+            if (webVal) {
+                $("#webVal").val(webVal);
+            } else {
+                $("#webVal").val('');
+            }
+            $("#webVal").blur(function () {
+                var webVal = $("#webVal").val();
+                $(obj).find("input[name='web[]']").val(webVal);
+                $("#webVal").unbind("blur");
+            })
+        }
+    }
+    //每个块的移动拖拽以及放大缩小
+    function drag() {
+        var draggable = $(".draggable");
+        draggable.each(function () {
+            $(this).resizable({
+                containment: '#containment-wrapper',
+                autoHide: true,
+                minHeight: 150,
+                minWidth: 150,
+                stop: function (event, ui) {
+                    var inArrays = new Array();
+                    var x1 = $(this).position().top;
+                    var x2 = $(this).width() + 2;
+                    var y1 = $(this).position().left;
+                    var y2 = $(this).height() + 2;
+                    var arr = [x1, x2, y1, y2];
+                    var array = eachDrag(arr);
+                    var touchingHeight = y2;
+                    var touchingWidth = x2;
+                    if (x2 <= 540 && y2 <= 860) {
+                        $.each(array, function (index, value) {
+                            if (typeof(value) == "undefined") {
+                                return true;
+                            }
+                            var result = touching(x1, x2, y1, y2, value);
+                            if (result) {
+                                if (x1 < value[0]) {
+                                    touchingHeight = (value[0] - x1 - 5);
+                                }
+                                if (y1 < value[2]) {
+                                    touchingWidth = (value[2] - y1 - 5);
+                                }
+                                inArrays = 0;
+                            }
+                        });
+                        if (inArrays == 0) {
+                            $(this).height(touchingHeight + "px");
+                            $(this).width(touchingWidth + "px");
+                        }
+                    }
+                }
+
+            }).draggable({
+                containment: '#containment-wrapper',
+                revert: function () {
+                    var x1 = $(this).position().top;
+                    var x2 = $(this).width() + 2;
+                    var y1 = $(this).position().left;
+                    var y2 = $(this).height() + 2;
+//                    console.log(2 * x1, 2 * (x1 + y2), 2 * x2, 2 * (x2 + y1));
+                    var array = eachDrag([x1, x2, y1, y2]);
+                    if (x2 <= 540 && y2 <= 860) {
+                        var inArrays = new Array();
+                        $.each(array, function (index, value) {
+                            if (typeof(value) == "undefined") {
+                                return true;
+                            }
+                            var result = touching(x1, x2, y1, y2, value);
+                            if (result) {
+                                inArrays = [0];
+                            }
+                        });
+                        if (inArrays[0] == 0) {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                },
+                stack: ".draggable"
+            });
+        });
+    }
+    //删除选中的拖拽div
+    function deleteDragModal() {
+        var deleteDragModal = $(".delete");
+        deleteDragModal.each(function (index, value) {
+            $(this).click(function () {
+                $(this).parent().remove();
+                isHDMIDrop();
+            });
+        })
+    }
+//    遍历每一个可拖动的div
+    function eachDrag(arr) {
+        var array = new Array();
+        var draggable = $(".draggable");
+        draggable.each(function (index) {
+            var x1 = $(this).position().top;
+            var x2 = $(this).width() + 2;
+            var y1 = $(this).position().left;
+            var y2 = $(this).height() + 2;
+            if (!(arr[0] == x1 && arr[1] == x2 && arr[2] == y1 && arr[3] == y2))
+                array[index] = [x1, x2, y1, y2];
+        });
+        return array;
+
+    }
+//    div之间的边界判断
+    function touching(x1, x2, y1, y2, value) {
+        return (
+                        (x1 >= value[0] && x1 <= value[0] + value[3]) || // 上端 touching
+                        (x1 + y2 >= value[0] && x1 + y2 <= value[0] + value[3]) || // 下端 touching
+                        (x1 < value[0] && x1 + y2 > value[0] + value[3])
+                ) && (
+                        (y1 >= value[2] && y1 <= value[2] + value[1]) || // 左端 touching
+                        (y1 + x2 >= value[2] && y1 + x2 <= value[2] + value[1]) || // 右端 touching
+                        (y1 < value[2] && y1 + x2 > value[2] + value[1])
+                );
+    }
+//    提交数据
+    function push() {
+        var allArray = new Array();
+        var imageArray = new Array();
+        $("input[name='image[]']").each(function (index) {
+            var imgVal = $(this).val();
+            var x1 = $(this).parent().position().top;
+            var x2 = $(this).parent().width();
+            var y1 = $(this).parent().position().left;
+            var y2 = $(this).parent().height();
+            imageArray[index] = {
+                imageAdd: imgVal,
+                top: 2 * parseInt(x1),
+                width: 2 * parseInt(x2),
+                left: 2 * parseInt(y1),
+                height: 2 * parseInt(y2)
+//                top: 2 * parseInt(x1),
+//                bottom: 2 * parseInt(x1) + 2 * parseInt(y2),
+//                left: 2 * parseInt(y1),
+//                right: 2 * parseInt(y1) + 2 * parseInt(x2)
+            };
+        });
+        var videoArray = new Array();
+        $("input[name='videoAdd[]']").each(function (index) {
+            var videoval = $(this).val();
+            var videoVoice = $(this).parent().find("input[name='videoVoice[]']").val();
+            var videoPlay = $(this).parent().find("input[name='videoPlay[]']").val();
+            var x1 = $(this).parent().position().top;
+            var x2 = $(this).parent().width();
+            var y1 = $(this).parent().position().left;
+            var y2 = $(this).parent().height();
+            videoArray[index] = {
+                videoAdd: videoval,
+                top: 2 * parseInt(x1),
+                width: 2 * parseInt(x2),
+                left: 2 * parseInt(y1),
+                height: 2 * parseInt(y2),
+                openVoice: videoVoice == 1 ? true : false,
+                videoPlayback: videoPlay == 1 ? true : false
+            };
+        });
+        var textArray = new Array();
+        $("input[name='textvalue[]']").each(function (index) {
+            var textvalue = $(this).val();
+            var textColor = $(this).parent().find("input[name='textColor[]']").val();
+            var textFont = $(this).parent().find("input[name='textFont[]']").val();
+            switch (textColor) {
+                case ("red"):
+                    textColor = "#FF0000";
+                    break;
+                case ("green"):
+                    textColor = "#00FF42";
+                    break;
+                case ("blue"):
+                    textColor = "#2D96DF";
+                    break;
+                case ("black"):
+                    textColor = "#000000";
+                    break;
+            }
+			switch (textFont) {
+                case ("s"):
+                    textFont = 18;
+                    break;
+                case ("m"):
+                    textFont = 22;
+                    break;
+                case ("l"):
+                    textFont = 26;
+                    break;
+                default:
+                    textFont = 22;
+            }
+            var x1 = $(this).parent().position().top;
+            var x2 = $(this).parent().width();
+            var y1 = $(this).parent().position().left;
+            var y2 = $(this).parent().height();
+            textArray[index] = {
+                textVal: textvalue,
+                top: 2 * parseInt(x1),
+                width: 2 * parseInt(x2),
+                left: 2 * parseInt(y1),
+                height: 2 * parseInt(y2),
+                textColor: textColor,
+                textFont: textFont
+            };
+
+        });
+        var hdmiArray = new Array();
+        $("input[name='hdmi[]']").each(function (index) {
+            var hdmi = $(this).val();
+            var x1 = $(this).parent().position().top;
+            var x2 = $(this).parent().width();
+            var y1 = $(this).parent().position().left;
+            var y2 = $(this).parent().height();
+//            console.log(hdmi);
+            hdmiArray[index] = {
+                hdmi: hdmi,
+                top: 2 * parseInt(x1),
+                width: 2 * parseInt(x2),
+                left: 2 * parseInt(y1),
+                height: 2 * parseInt(y2),
+                openVoice: hdmi == 1 ? true : false
+            };
+
+        });
+        var webArray = new Array();
+        $("input[name='web[]']").each(function (index) {
+            var web = $(this).val();
+            var x1 = $(this).parent().position().top;
+            var x2 = $(this).parent().width();
+            var y1 = $(this).parent().position().left;
+            var y2 = $(this).parent().height();
+            webArray[index] = {
+                web: web,
+                top: 2 * parseInt(x1),
+                width: 2 * parseInt(x2),
+                left: 2 * parseInt(y1),
+                height: 2 * parseInt(y2)
+            };
+
+        });
+        allArray = {image: imageArray, video: videoArray, text: textArray, hdmi: hdmiArray, web: webArray};
+        var allJsonData = JSON.stringify(allArray);
+        //console.log(allJsonData);
+        $.post("/draged", {"data": allJsonData});
+        alert("提交成功！")
+    }
+</script>
+</html>

@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: lightgrey;
+}
+.row{
+    margin: 0;
+}
+.leftModal {
+    border: 2px solid gray;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.col-lg-1{
+    padding: 0;
+}
+.modal-header {
+    border-bottom: 2px solid #000000;
+    padding: 5px;
+    background-color: #449D44;
+}
+
+.rightBox {
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.leftDrag {
+    text-align: center;
+    margin: 15px auto;
+}
+
+.Drag {
+    width: 172px;
+    height: 180px;
+    background-color: #ffffff;
+    border: 1px #000000 solid;
+    float: left;
+}
+
+#containment-wrapper {
+    position: relative;
+    margin-left: 20px;
+}
+
+.containment-wrapper {
+    position: relative;
+    background-color: #f7f7f7;
+    opacity: 0.4;
+}
+
+.rightModal {
+    margin-left: -110px;
+}
+
+.draggable {
+    cursor: move;
+}
+
+.header {
+    height: 150px;
+    padding-top: 30px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+#imageDrag:hover {
+    cursor: move;
+}
+
+#videoDrag:hover {
+    cursor: move;
+}
+
+#textDrag:hover {
+    cursor: move;
+}
+
+#HDMIDrag:hover {
+    cursor: move;
+}
+#webDrag:hover {
+    cursor: move;
+}
+
+.close {
+    opacity: 1;
+}
+
+button {
+    margin: 0;
+}
